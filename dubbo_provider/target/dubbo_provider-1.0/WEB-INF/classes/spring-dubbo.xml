@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- dubbo应用的名称-->
+    <dubbo:application name="dubbo-provider"/>
+    <!-- 服务注册中新的地址-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!--指定暴露的服务接口及实例-->
+    <!--用注解实现标记服务提供者要去掉下面这两个配置-->
+   <!-- <dubbo:service interface="com.lujunzhi.service.UserService"
+                   ref="userSerivce"/>
+    &lt;!&ndash;配置业务类实例&ndash;&gt;
+    <bean id="userSerivce"
+          class="com.lujunzhi.service.imp.UserServiceImp"/>-->
+    <!--<dubbo:annotation package="com.lujunzhi.service" />-->
+    <!--<dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>-->
+    <!-- 多协议配置 -->
+   <!-- <dubbo:protocol name="dubbo" port="20881" />
+    <dubbo:protocol name="rmi" port="1099" />-->
+ <!--   &lt;!&ndash; 使用dubbo协议暴露服务 &ndash;&gt;
+    <dubbo:service interface="com.itheima.service.HelloService" ref="helloService" protocol="dubbo" />
+    &lt;!&ndash; 使用rmi协议暴露服务 &ndash;&gt;
+    <dubbo:service interface="com.itheima.service.DemoService" ref="demoService" protocol="rmi" />
+  -->  <!-- 使用dubbo rmi协议暴露服务 -->
+  <!--  <dubbo:service interface="com.lujunzhi.service.UserService" ref="userService"/>
+-->
+   <!-- <bean id="helloService" class="com.itheima.service.impl.HelloServiceImpl" />
+    <bean id="demoService" class="com.itheima.service.impl.DemoServiceImpl" />
+  -->  <!--<bean id="userService" class="com.lujunzhi.service.imp.UserServiceImp" />
+   --> <dubbo:annotation package="com.lujunzhi.service" />
+    <!--配置好协议后，可在配置文件用也可以注解上用-->
+    <!--<dubbo:protocol name="rmi" port="1100" />-->
+    <dubbo:provider timeout="3000"/>
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- dubbo基本配置-->
+    <dubbo:application name="dubbo-consumer"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!--订阅远程服务对象，id的名称和Controller类中的UserService接口名称要一致-->
+   <!--使用注解要去掉这一句 <dubbo:reference id="userService" interface="com.lujunzhi.service.UserService"/>-->
+    <dubbo:annotation package="com.lujunzhi.controller"/>
+    <!--启动时不检查-->
+    <!--注意如果有多条语句，要合成一句话写，否则会报配置对象重复错误-->
+    <dubbo:consumer check="false" timeout="3000"/>
+</beans>
